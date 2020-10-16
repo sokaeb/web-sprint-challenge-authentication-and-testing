@@ -32,8 +32,17 @@ describe('auth-router.js', () => {
     });
 
     describe('POST /login', () => {
-        beforeEach( async () => {
-            await db('users').truncate();
+        it('should login a user', async () => {
+           await supertest(server)
+            .post('/api/auth/login')
+            .send({
+                username: 'Glen',
+                password: 'password'
+            })
+            .then(res => {
+                expect(res.body.message).toBe("You are now logged in.");
+                expect(res.status).toBe(200);
+            });
         });
     })
 
