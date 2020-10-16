@@ -7,6 +7,18 @@ module.exports = {
     findById,
 };
 
+function find() {
+    return db('users')
+    .select("id", "username")
+    .orderBy("id")
+};
+
+function findBy(filter) {
+    return db('users')
+    .where(filter)
+    .orderBy("id")
+}
+
 function add(user) {
     return db('users')
     .insert(user, "id")
@@ -19,17 +31,6 @@ function add(user) {
         console.log(err)
     });
 };
-
-function find() {
-    return db('users')
-    .select("id", "username")
-    .orderBy("id");
-};
-
-function findBy(filter) {
-    return db('users')
-    .where(filter)
-}
 
 function findById(id) {
     return db('users')
